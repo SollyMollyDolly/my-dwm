@@ -42,8 +42,10 @@
 #include <X11/Xft/Xft.h>
 
 #include <X11/XF86keysym.h>                 /*Access to 'fn' keys and such*/
-#define XK_BRup   XF86XK_MonBrightnessUp
-#define XK_BRdown XF86XK_MonBrightnessDown
+#define XS_BRup   XF86XK_MonBrightnessUp
+#define XS_BRdown XF86XK_MonBrightnessDown
+#define XS_VOup   XF86XK_AudioRaiseVolume
+#define XS_VOdown XF86XK_AudioLowerVolume
 
 #include "drw.h"
 #include "util.h"
