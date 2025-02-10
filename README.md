@@ -1,6 +1,7 @@
 # DISCLAIMER
 dwm is made and maintained by the suckless software team
 https://dwm.suckless.org/
+Oh and about that script, yeah, it's bad, I know, not proud of it.
 
 
 dwm - dynamic window manager

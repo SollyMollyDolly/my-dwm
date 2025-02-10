@@ -59,12 +59,16 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *printcmd[] = { "screencapture.sh", NULL }; /*custom made script*/
+static const char *upbrightness[]   = { "xbacklight", "-inc", "10", NULL };
+static const char *downbrightness[] = { "xbacklight", "-dec", "10", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_o,      spawn,          {.v = termcmd } },
     { 0,                            XK_Print,  spawn,          {.v = printcmd } },
+	{ 0,                            XK_BRup,   spawn,          {.v = upbrightness } },
+	{ 0,                            XK_BRdown, spawn,          {.v = downbrightness } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
