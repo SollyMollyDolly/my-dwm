@@ -42,11 +42,10 @@
 #include <X11/Xft/Xft.h>
 
 #include <X11/XF86keysym.h>                 /*Access to 'fn' keys and such*/
-#define XS_VOup   XF86XK_AudioRaiseVolume
-#define XS_VOdown XF86XK_AudioLowerVolume
-#define XS_VOmute XF86XK_AudioMute
 #define XS_BRup   XF86XK_MonBrightnessUp
 #define XS_BRdown XF86XK_MonBrightnessDown
+#define XS_VOup   XF86XK_AudioRaiseVolume
+#define XS_VOdown XF86XK_AudioLowerVolume
 
 #include "drw.h"
 #include "util.h"
@@ -744,10 +743,7 @@ drawbar(Monitor *m)
 	if ((w = m->ww - tw - x) > bh) {
 		if (m->sel) {
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-			if (TEXTW(m->sel->name) > w) /* title is bigger than the width of the title rectangle, don't center */
-				drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
-			else /* center window title + 20 pixels seems to center better idk why*/
-				drw_text(drw, x, 0, w, bh, (20 + w - TEXTW(m->sel->name)) / 2, m->sel->name, 0);
+			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
 			if (m->sel->isfloating)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 		} else {

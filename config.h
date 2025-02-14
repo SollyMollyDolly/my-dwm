@@ -11,11 +11,16 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char col_peach[]       = "#ffcda2";
+static const char col_blue1[]       = "#0044ff";
+static const char col_blue2[]       = "#04d1f9";
+static const char col_purpl[]       = "#7f007f";
+static const char col_pink1[]       = "#ffd1dc";
+static const char col_pink2[]       = "#7f686e";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeNorm] = { col_blue1, col_pink1,  col_pink2 },
+	[SchemeSel]  = { col_purpl, col_peach,  col_pink1 },
 };
 
 /* tagging */
@@ -31,7 +36,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.549779999999; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -56,24 +61,26 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_peach, "-nf", col_purpl, "-sb", col_purpl, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *printcmd[] = { "screencapture.sh", NULL }; /*custom made script*/
-static const char *incvol[]   = {"amixer", "set", "Master", "5+", NULL};
-static const char *decvol[]   = {"amixer", "set", "Master", "5-", NULL};
-static const char *upbrightness[]   = { "xbacklight", "-inc", "10", NULL };
-static const char *downbrightness[] = { "xbacklight", "-dec", "10", NULL };
+static const char *printcmd[] = { "screencapture.sh", NULL }; 
+static const char *incvol[]   = { "raisevol-amixer", NULL};
+static const char *decvol[]   = { "lowervol-amixer", NULL};
+static const char *mutevol[]  = { "mutevol-amixer",  NULL};
+static const char *upbrightness[]   = { "raisebl", NULL };
+static const char *downbrightness[] = { "lowerbl", NULL };
 
 /*XS_... are custom names because originals were very ugly, check dwm.c*/
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_o,      spawn,          {.v = termcmd } },
-    { 0,                            XK_Print,  spawn,          {.v = printcmd } },
+	{ 0,                            XK_Print,  spawn,          {.v = printcmd } },
 	{ 0,                            XS_BRup,   spawn,          {.v = upbrightness } },
 	{ 0,                            XS_BRdown, spawn,          {.v = downbrightness } },
-	{ 0,				            XS_VOup,   spawn,          {.v = incvol} },
-    { 0,	            			XS_VOdown, spawn,          {.v = decvol} },	
+	{ 0,             				XS_VOup,   spawn,          {.v = incvol} },
+	{ 0,	                        XS_VOdown, spawn,          {.v = decvol} },	
+	{ 0,	                        XS_VOmute, spawn,          {.v = mutevol} },	
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
